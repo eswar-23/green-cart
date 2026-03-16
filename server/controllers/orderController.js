@@ -129,7 +129,7 @@ export const stripeWebhooks = async(request,response)=>{
       // handle the event
 
       switch (event.type) {
-        case "payment_intent.succeeded":{
+        case "checkout.session.completed":{
             const paymentIntent = event.data.object
             const paymentIntentId= paymentIntent.id
 
@@ -180,6 +180,7 @@ export const getUserOrders = async (req,res)=>{
         }).populate("items.product address").sort({createdAt: -1})
         res.json({success:true, orders})
     } catch (error) {
+        
            res.json({success:false,message:error.message})
     }
 }
