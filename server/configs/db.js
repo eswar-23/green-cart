@@ -1,10 +1,12 @@
 import mongoose from "mongoose"
-mongoose.connect('mongodb://localhost:27017/green-cart');
- 
-const db=mongoose.connection
 
-db.on('error',console.error.bind(console, 'connection error:'));
-db.once('open',()=>{
-    console.log("db connected");
-    
-})
+const connectDB = async () => {
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/green-cart")
+    console.log("DB connected")
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export default connectDB
