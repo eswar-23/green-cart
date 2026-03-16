@@ -2,10 +2,11 @@ import mongoose from "mongoose"
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/green-cart")
-    console.log("DB connected")
+    mongoose.connection.on('connected',()=> console.log("db connected")
+    )
+    await mongoose.connect(`${process.env.MONGODB_URI}/green-cart`)
   } catch (error) {
-    console.log(error)
+    console.error(error.message)
   }
 }
 
